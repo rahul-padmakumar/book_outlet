@@ -6,7 +6,7 @@
     <h1>Books List</h1>
     <ul>
         {% for book in books %}
-        <li><a href="">{{book.title}}</a></li>
+        <li><a href="{% url "book_detail" book.id%}">{{book.title}}</a></li>
         {% endfor %}
     </ul>
 {% endblock  %}
