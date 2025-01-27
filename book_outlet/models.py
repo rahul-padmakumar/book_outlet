@@ -8,6 +8,12 @@ class Country(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=2)
 
+    def __str__(self):
+        return f"{self.name}"
+    
+    class Meta():
+        verbose_name_plural="Country List"
+
 class Address(models.Model):
     street_name = models.CharField(max_length=100)
     postal_code = models.CharField(max_length=10)
