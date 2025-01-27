@@ -4,6 +4,9 @@ from django.urls import reverse
 from django.utils.text import slugify
 
 # Create your models here.
+class Country(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=2)
 
 class Address(models.Model):
     street_name = models.CharField(max_length=100)
@@ -12,6 +15,9 @@ class Address(models.Model):
 
     def __str__(self):
         return f"{self.street_name} {self.city}"
+    
+    class Meta():
+        verbose_name_plural = "Address entries"
     
 
 class Author(models.Model):
@@ -29,6 +35,7 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name="books")
     is_bestselling = models.BooleanField(default=True)
     slug = models.SlugField(default="", null=False)
+    published_country = models.ManyToManyField(Country)
 
     def get_absolute_url(self):
         return reverse("book_detail", args=[self.slug])
